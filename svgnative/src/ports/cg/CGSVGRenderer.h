@@ -1,0 +1,8 @@
+#ifndef MY_HEADER_H
+#define MY_HEADER_H
+#include<math.h>
+#include "svgnative/ports/cg/CGSVGRenderer.h"
+#include "base64.h"
+#include "svgnative/Config.h"
+namespace SVGNative{class CGSVGPath{public:CGSVGPath();~CGSVGPath();void Rect(float x,float y,float width,float height);void RoundedRect(float x,float y,float width,float height,float rx,float ry);void Ellipse(float cx,float cy,float rx,float ry);void MoveTo(float x,float y);void LineTo(float x,float y);void CurveTo(float x1,float y1,float x2,float y2,float x3,float y3);void CurveToV(float x2,float y2,float x3,float y3);void ClosePath();private:CGMutablePathRef mPath;float mCurrentX;float mCurrentY;};class CGSVGTransform{public:CGSVGTransform(float a,float b,float c,float d,float tx,float ty);void Set(float a,float b,float c,float d,float tx,float ty);void Rotate(float degree);void Translate(float tx,float ty);void Scale(float sx,float sy);void Concat(float a,float b,float c,float d,float tx,float ty);private:CGAffineTransform mTransform;};class CGSVGImageData{public:CGSVGImageData(const std::string&base64,ImageEncoding encoding);~CGSVGImageData();float Width()const;float Height()const;private:CGImageRef mImage;};class CGSVGRenderer{public:CGSVGRenderer();void Save(const GraphicStyle&graphicStyle);void Restore();void DrawGradientToContext(const Gradient&gradient,float opacity);void DrawPath(const Path&path,const GraphicStyle&graphicStyle,const FillStyle&fillStyle,const StrokeStyle&strokeStyle);void DrawImage(const ImageData&image,const GraphicStyle&graphicStyle,const Rect&clipArea,const Rect&fillArea);private:CGContextRef mContext;};}
+#endif
